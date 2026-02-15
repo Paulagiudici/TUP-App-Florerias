@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <header class="bg-dark py-5">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Floralis - Tu Tienda de Flores</h1>
+                <p class="lead fw-normal text-white-50 mb-0">💐 La belleza de la naturaleza a un click de distancia 💐</p>
+            </div>
+        </div>
+    </header>
+<h1>Contacto</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Enviar</button>
+</form>
+{% block content %}

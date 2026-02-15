@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Carrito</h1>
+{% if carrito.items.all %}
+  <ul>
+    {% for item in carrito.items.all %}
+      <li>
+        {{ item.producto.nombre }} - {{ item.cantidad }} x ${{ item.producto.precio }} = ${{ item.subtotal }}
+        <a href="{% url 'tienda:eliminar_item_carrito' item.id %}">Eliminar</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <p>Total: ${{ carrito.total }}</p>
+  {% if user.is_authenticated %}
+    <a href="{% url 'tienda:checkout' %}">Finalizar compra</a>
+  {% else %}
+    <p><a href="{% url 'usuarios:login' %}?next={% url 'tienda:checkout' %}">Inicia sesión</a> para finalizar compra.</p>
+  {% endif %}
+{% else %}
+  <p>Tu carrito está vacío.</p>
+{% endif %}
+{% endblock %}
